@@ -1,0 +1,28 @@
+name: Package build of BeeGFS
+on:
+  push:
+
+jobs:
+  
+  first:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Make 3 files
+        run:  mkdir -p result/sub; touch result/x result/y result/sub/z
+      - name: upload test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: same-name
+          path: result
+  
+  second:
+    needs: first
+    runs-on: ubuntu-latest
+    steps:
+      - name: Make 3 files
+        run:  mkdir -p result/sub; touch result/a result/b result/sub/c
+      - name: upload Test Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: same-name
+          path: result
